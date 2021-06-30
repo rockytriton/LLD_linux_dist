@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "package.h": "c",
+        "common.h": "c",
+        "unistd.h": "c"
+    }
+}
