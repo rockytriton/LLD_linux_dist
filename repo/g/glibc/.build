@@ -1,0 +1,29 @@
+patch -Np1 -i ../glibc-2.33-fhs-1.patch
+sed -e '402a\      *result = local->data.services[database_index];' \
+    -i nss/nss_database.c
+
+mkdir -v build
+cd       build
+
+../configure --prefix=/usr                            \
+             --disable-werror                         \
+             --enable-kernel=3.2                      \
+             --enable-stack-protector=strong          \
+             --with-headers=/usr/include              \
+             libc_cv_slibdir=/lib
+
+make
+sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
+
+make DESTDIR=$P install
+
+mkdir -p $P/etc
+cp -v ../nscd/nscd.conf $P/etc/nscd.conf
+mkdir -pv $P/var/cache/nscd
+
+install -v -Dm644 ../nscd/nscd.tmpfiles $P/usr/lib/tmpfiles.d/nscd.conf
+install -v -Dm644 ../nscd/nscd.service $P/lib/systemd/system/nscd.service
+
+mkdir -pv $P/usr/lib/locale
+
+cp ../../tzdata2021a.tar.gz $P/.install
