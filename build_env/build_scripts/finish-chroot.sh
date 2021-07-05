@@ -36,7 +36,7 @@ bash -e build_scripts/chr-gettext.sh gettext-0.21.tar.xz
 bash -e build_scripts/chr-bison.sh bison-3.7.5.tar.xz
 bash -e build_scripts/chr-perl.sh perl-5.32.1.tar.xz
 bash -e build_scripts/chr-python.sh Python-3.9.2.tar.xz
-bash -e build_scripts/chr-textinfo.sh texinfo-6.7.tar.xz
+bash -e build_scripts/chr-texinfo.sh texinfo-6.7.tar.xz
 bash -e build_scripts/chr-util-linux.sh util-linux-2.36.2.tar.xz
 
 echo "Finished Chroot build!"
