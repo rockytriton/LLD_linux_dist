@@ -22,6 +22,8 @@ useradd -s /bin/bash -g distbuild -m -k /dev/null distbuild
 passwd distbuild
 chown -v distbuild $LFS/{usr,lib,var,etc,bin,sbin,tools,lib64,sources}
 
+echo "distbuild ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sudoers_distbuild
+
 dbhome=$(eval echo "~distbuild")
 
 cat > $dbhome/.bash_profile << "EOF"
