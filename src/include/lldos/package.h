@@ -37,4 +37,21 @@ typedef struct {
 } lldos_package;
 
 u32 lldos_package_to_string(lldos_package *pck, char *buffer, u32 max_size);
+lldos_package *package_load(char *root, char *name);
+
+typedef struct package_list_entry_ {
+    lldos_package *pck;
+    struct package_list_entry_ *next;
+} package_list_entry;
+
+typedef struct {
+    package_list_entry *head;
+    package_list_entry *tail;
+} package_list;
+
+bool package_load_all(char *root, package_list *list);
+lldos_package *package_list_find(package_list *list, char *name);
+package_list_entry *package_list_add(package_list *list, lldos_package *pck);
+bool package_is_installed(char *root, char *name);
+
 
